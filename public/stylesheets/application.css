@@ -1,0 +1,15 @@
+/*body { 
+background: url('https://issycs.files.wordpress.com/2012/09/vinyl-collection1.jpg') no-repeat center center fixed; 
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover;
+}*/
+
+.top-buffer { margin-top:10px; }
+
+.top-buffer2 { margin-top: 25px; }
+
+.wrapper {
+  background: rgba(76,31,0, 0.4);
+}

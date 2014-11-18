@@ -1,0 +1,12 @@
+<% if current_user %>
+<p>Logged in as <%= current_user.name %></p>
+
+<div>
+<form action="/users/session" method="post">
+  <input type="submit" value="Logout">
+</form>
+</div>
+
+<% else %>
+<p><a href="users/login">Log in</a></p>
+<% end %>

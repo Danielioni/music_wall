@@ -1,0 +1,13 @@
+<% if current_user %>
+
+  <form action="/songs/<%= @song.id %>/upvotes" method="post">
+    <input type="submit" value="up">
+  </form>
+
+  <form action="/songs/<%= @song.id %>/downvotes" method="post">
+    <input type="submit" value="down">
+  </form>
+
+<% end %>
+
+<p>  <%= @song.upvotes %> up <%= @song.downvotes %> down <%= @song.total_votes || 0 %> total</p>

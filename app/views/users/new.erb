@@ -1,0 +1,44 @@
+<% if @user.errors.any? %>
+  <div>
+    <strong>Some issues with your submission, please fix them:</strong>
+    <ul>
+      <% @user.errors.full_messages.each do |error_message| %>
+        <li><%= error_message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<form action = "/users/new" method = "post">
+
+  <h3 class="row text-info form-group col-sm-offset-1">Create an account</h3>
+  
+  <div class="row form-group">
+    <label for="inputName" class="col-sm-11 col-sm-offset-1 control-label">Username:</label>
+    <div class="col-sm-4 col-sm-offset-1">
+      <input type="text" class="form-control" name="name"  placeholder="name">
+    </div>
+  </div>
+
+  <div class="row form-group">
+    <label for="inputPassword" class="col-sm-11 col-sm-offset-1 control-label">Password:</label>
+    <div class="col-sm-4 col-sm-offset-1">
+      <input type="password" class="form-control" name="password" placeholder="password">
+    </div>
+  </div>
+
+  <div class="row form-group">
+    <label for="inputEmail3" class="col-sm-11 col-sm-offset-1 control-label">Email (optional):</label>
+    <div class="col-sm-4 col-sm-offset-1">
+      <input type="text" class="form-control" name="email" placeholder="email" value="<%= @user.email %>">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <button type="submit" value="Submit" class="btn btn-default col-sm-1 col-sm-offset-1">
+      <span class="glyphicon glyphicon-off"></span> Signup
+    </button>
+  </div>
+
+</form>
+

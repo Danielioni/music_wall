@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!--
+    normalize.css removes cross-browser differences in defaults, e.g.,
+    differences in how form elements appear between Firefox and IE
+    See: http://necolas.github.com/normalize.css/
+  -->
+  <!-- MADE BELOW A COMMENT - USING BOOTSTRAP -->
+  <!-- <link rel="stylesheet" href="/stylesheets/normalize.css"> -->
+
+  <!--
+    application.css is where you put your styles
+  -->
+  <link rel="stylesheet" href="/stylesheets/application.css">
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script src="/javascript/application.js"></script>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+  <title></title>
+</head>
+  <body>
+    <div class="container">
+      
+      <div class="page-header">
+        <h1 class="text-info">MusicWall
+          <small class="col-sm-offset-1">
+            <% if current_user %>
+              <a href="/logout">Logout</a>
+            <% else %>
+              <a href="/login">Login</a>
+            <% end %>
+          </small>
+          <small class="col-sm-offset-1">
+            <a href="/songs"> Song List</a>
+          </small>
+          <small class="col-sm-offset-1">
+            <a href="/songs/new">Post Song</a>
+          </small>
+        </h1>
+      </div>
+
+      <%= yield %>
+      
+    </div>
+  </body>
+</html>
