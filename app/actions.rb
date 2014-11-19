@@ -4,7 +4,6 @@ enable :sessions
 
 helpers do
   def current_user
-    # session[:user_id] ? User.find(session[:user_id]) : nil
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
 end
@@ -56,15 +55,9 @@ post '/users/new' do
   if @user.save
     session[:user_id] = @user.id
     redirect "/songs"
-    # redirect "users/confirmation/#{@user.id}"
   else
     erb :'users/new'
   end
-end
-
-get '/users/confirmation/:id' do
-  @user = User.find(params[:id])
-  erb :'users/confirmation'
 end
 
 get '/users/login' do
@@ -81,6 +74,11 @@ post 'users/login' do
   end
 end
 
+get '/users/session' do
+  session.clear
+  redirect '/songs'
+end
+
 post '/users/session' do
   session.clear
   redirect '/songs'
@@ -88,42 +86,22 @@ end
 
 post '/songs/:id/upvotes' do
   song = Song.find params[:id]
-  song.votes.create(user_id: current_user.id, value: 1)
-  redirect '/songs'
-  # vote = song.votes.where(user_id: current_user.id).first
-  # if vote
-  #   if vote.value > 0
-  #     vote.value += 0
-  #     vote.save!
-  #     redirect '/songs'
-  #     #erb :'song/vote_error'
-  #   else
-  #     vote.value += 1
-  #     vote.save!
-  #     redirect '/songs'
-  #   end
-  # else
-  #   song.votes.create(user_id: current_user.id, value: 1)
-  #   redirect '/songs'
-  # end
+  upvote = song.votes.where(user_id: current_user.id).first
+  if upvote.value == 0
+    song.votes.create(user_id: current_user.id, value: 1)
+    redirect '/songs'
+  else
+    redirect '/songs'
+  end
 end
 
 post '/songs/:id/downvotes' do
   song = Song.find params[:id]
-  vote = song.votes.where(user_id: current_user.id).first
-  if vote
-    if vote.value < 0
-      vote.value -= 0
-      vote.save!
-      redirect '/songs'
-      # erb :'song/vote_error'
-    else
-      vote.value -= 1
-      vote.save!
-      redirect '/songs'
-    end
-  else
+  downvote = song.votes.where(user_id: current_user.id).first
+  if downvote.value == 0
     song.votes.create(user_id: current_user.id, value: -1)
+    redirect '/songs'
+  else
     redirect '/songs'
   end
 end

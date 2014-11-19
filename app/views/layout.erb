@@ -28,22 +28,27 @@
         <h1 class="text-info">MusicWall
           <small class="col-sm-offset-1">
             <% if current_user %>
-              <a href="/logout">Logout</a>
+              <a href="/users/session">Logout</a>
             <% else %>
               <a href="/login">Login</a>
             <% end %>
           </small>
           <small class="col-sm-offset-1">
-            <a href="/songs"> Song List</a>
+            <a href="/songs">Song List</a>
           </small>
           <small class="col-sm-offset-1">
             <a href="/songs/new">Post Song</a>
+          </small>
+          <small class="col-sm-offset-1">
+            <% if current_user %>
+              Signed in: <%= current_user.name %> 
+            <% end %>
           </small>
         </h1>
       </div>
 
       <%= yield %>
-      
+
     </div>
   </body>
 </html>
