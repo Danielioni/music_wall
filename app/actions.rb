@@ -60,11 +60,11 @@ post '/users/new' do
   end
 end
 
-get '/users/login' do
+get '/login' do
   erb :'users/login'
 end
 
-post 'users/login' do
+post '/login' do
   user = User.where(name: params[:name], password: params[:password]).first
   if user 
     session[:user_id] = user.id 
@@ -87,7 +87,7 @@ end
 post '/songs/:id/upvotes' do
   song = Song.find params[:id]
   upvote = song.votes.where(user_id: current_user.id).first
-  if upvote.value == 0
+  if upvote == nil
     song.votes.create(user_id: current_user.id, value: 1)
     redirect '/songs'
   else
@@ -98,7 +98,7 @@ end
 post '/songs/:id/downvotes' do
   song = Song.find params[:id]
   downvote = song.votes.where(user_id: current_user.id).first
-  if downvote.value == 0
+  if downvote == nil
     song.votes.create(user_id: current_user.id, value: -1)
     redirect '/songs'
   else

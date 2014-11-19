@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141118032113) do
+ActiveRecord::Schema.define(version: 20141118032114) do
 
   create_table "songs", force: true do |t|
     t.string   "title"
@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 20141118032113) do
   create_table "votes", force: true do |t|
     t.integer  "song_id"
     t.integer  "user_id"
-    t.integer  "value"
+    t.integer  "value",      default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
